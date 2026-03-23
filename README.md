@@ -16,6 +16,25 @@ ccnotify -t "Build" "Compilation finished!"
 
 ## Install
 
+### Download pre-built binary
+
+1. Download [ccnotify-macos.zip](https://github.com/codexxzz/ccnotify/releases/latest/download/ccnotify-macos.zip)
+2. Unzip and move `ccnotify.app` to `/Applications`
+3. Remove the quarantine attribute (since the app is not notarized by Apple):
+
+```bash
+xattr -cr /Applications/ccnotify.app
+```
+
+4. Create a CLI wrapper:
+
+```bash
+sudo bash -c 'echo "#!/bin/bash
+open -W /Applications/ccnotify.app --args \"\\\$@\"" > /usr/local/bin/ccnotify && chmod +x /usr/local/bin/ccnotify'
+```
+
+5. Run `ccnotify "test"` — allow notifications when prompted.
+
 ### From source
 
 Requires Xcode Command Line Tools (`xcode-select --install`).
@@ -30,22 +49,17 @@ make install
 
 On first run, macOS will prompt for notification permission — click **Allow**.
 
-### Build only (without installing)
-
-```bash
-make build
-```
-
-Then run directly:
-
-```bash
-open -W ccnotify.app --args "your message"
-```
-
 ## Uninstall
 
 ```bash
 make uninstall
+```
+
+Or manually:
+
+```bash
+rm -rf /Applications/ccnotify.app
+rm -f /usr/local/bin/ccnotify
 ```
 
 ## How it works
