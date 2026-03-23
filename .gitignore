@@ -1,0 +1,6 @@
+icon.iconset/
+ccnotify.app/Contents/MacOS/ccnotify
+ccnotify.app/Contents/Resources/AppIcon.icns
+ccnotify.app/Contents/_CodeSignature/
+.DS_Store
+.claude/
